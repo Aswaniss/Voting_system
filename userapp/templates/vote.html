@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right,rgb(14, 175, 167),rgb(43, 27, 189));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.15);
+            border: none;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 26px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .vote-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: start;
+        }
+
+        /* Hide default radio button */
+        .vote-option input {
+            display: none;
+        }
+
+        /* Custom radio button style */
+        .vote-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: 500;
+            background: #f4f4f4;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            border: 2px solid transparent;
+            width: 100%;
+        }
+
+        .vote-option:hover {
+            background: rgba(255, 159, 67, 0.2);
+            border: 2px solid #ff9f43;
+        }
+
+        /* Custom circular radio button */
+        .vote-option input + .radio-mark {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #ff9f43;
+            display: inline-block;
+            position: relative;
+        }
+
+        /* Radio button checked effect */
+        .vote-option input:checked + .radio-mark {
+            background: #ff9f43;
+            border: 2px solid #e67e22;
+        }
+
+        /* Inner circle for selected radio */
+        .vote-option input:checked + .radio-mark::after {
+            content: "";
+            width: 10px;
+            height: 10px;
+            background: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        .btn {
+            background: #ff9f43;
+            color: white;
+            padding: 12px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #e67e22;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>VOTE FOR YOUR FAVORITES!</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <div class="vote-options">
+                <label class="vote-option">
+                    <input type="radio" name="candidate" value="Mammuti">
+                    <span class="radio-mark"></span>
+                    Mammuti
+                </label>
+                <label class="vote-option">
+                    <input type="radio" name="candidate" value="Mohanlal">
+                    <span class="radio-mark"></span>
+                    Mohanlal
+                </label>
+                <label class="vote-option">
+                    <input type="radio" name="candidate" value="Dulquar">
+                    <span class="radio-mark"></span>
+                    Dulquar Salmaan
+                </label>
+            </div>
+            <br>
+            <input type="submit" class="btn" value="Vote">
+        </form>
+    {% endif %}
+</div>
+
+</body>
+</html>

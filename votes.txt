@@ -1,0 +1,1 @@
+{"Mammootty": 0, "Mohanlal": 2, "Dulquar": 0}
